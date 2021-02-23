@@ -1,7 +1,10 @@
 /* DB MODEL POST */
 const { Post } = require('../database/models')
 
-/* Controller GETS */
+/* Helpers */
+const Helper = require('../helpers')
+
+/* Controller method: GET */
 
 const GetAllPosts = async (req, res, next) =>{
     try {
@@ -72,7 +75,44 @@ const GetPostById = async (req, res, next) =>{
     }
 }
 
+/* Controller method: POST */
+const NewPost = async (req,res,next)=>{
+    try {
+        let img = req.body.img;
+        let checkImage = await Helper.CheckUrlImage(img);
+        if(!checkImage){
+            throw 'Link is not valid'
+        }
+        const newPost = await Post.create({
+            title: req.body.title,
+            content: req.body.content,
+            img: img,
+            idCategory: req.body.category,
+            creationTime: Date.now()
+        })
+        res.status(202).json({
+            status: "OK",
+            msg: "CORRECT_CREATION",
+            endpoint: req.originalUrl,
+            method: req.method,
+            data: {
+                post: newPost
+            }
+        })
+   
+    } catch (err) {
+        res.status(404).json({
+            status: "ERROR",
+            msg: err,
+            endpoint: req.originalUrl,
+            method: req.method
+        })
+    }
+  
+}
+
 module.exports ={
     GetAllPosts,
-    GetPostById
+    GetPostById,
+    NewPost
 }

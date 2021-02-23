@@ -11,7 +11,7 @@ router.get('/:id', postController.GetPostById);
 
 /* POST */
 
-router.post('/');
+router.post('/',postController.NewPost);
 
 /* PATCH */
 
