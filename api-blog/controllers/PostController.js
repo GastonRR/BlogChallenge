@@ -115,8 +115,13 @@ const UpdatePost = async (req,res,next) =>{
     try {
         let idToEdit = req.params.id;
         let checkIfExist = await Post.findByPk(idToEdit);
+        let img = req.body.img;
+        let checkImage = await Helper.CheckUrlImage(img);
+
         if(checkIfExist == null){
             throw "post not exist"
+        }else if(!checkImage && img !=undefined){
+            throw 'the link is not from an image'
         }
         const editPost = await Post.update(req.body,{
             where:{
