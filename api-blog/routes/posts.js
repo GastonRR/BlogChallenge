@@ -11,7 +11,7 @@ router.get('/:id', postController.GetPostById);
 
 /* POST */
 
-router.post('/',postController.NewPost);
+router.post('/', postController.NewPost);
 
 /* PATCH */
 
@@ -19,6 +19,6 @@ router.patch('/:id', postController.UpdatePost);
 
 /* DELETE */
 
-router.patch('/:id');
+router.delete('/:id', postController.DeletePost);
 
 module.exports = router;

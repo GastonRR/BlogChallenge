@@ -142,9 +142,41 @@ const UpdatePost = async (req,res,next) =>{
   
 
 }
+/* Controller method: DELETE */ 
+const DeletePost = async(req,res,next) => {
+    try {
+        let idPostToDelete = req.params.id;
+
+        const deletePost = await Post.destroy({
+            where: {
+                id: idPostToDelete
+            }
+        })
+        if(deletePost == 0){
+            throw "post not exist"
+        }
+        res.status(202).json({
+            status: "OK",
+            msg: "CORRECT_DELETE",
+            endpoint: req.originalUrl,
+            method: req.method
+        })
+
+       
+    } catch (error) {
+        res.status(404).json({
+            status: "ERROR",
+            msg: error,
+            endpoint: req.originalUrl,
+            method: req.method
+        })
+    }
+}
+
 module.exports ={
     GetAllPosts,
     GetPostById,
     NewPost,
-    UpdatePost
+    UpdatePost,
+    DeletePost
 }
