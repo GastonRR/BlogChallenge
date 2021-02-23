@@ -81,7 +81,7 @@ const NewPost = async (req,res,next)=>{
         let img = req.body.img;
         let checkImage = await Helper.CheckUrlImage(img);
         if(!checkImage){
-            throw 'Link is not valid'
+            throw 'the link is not from an image'
         }
         const newPost = await Post.create({
             title: req.body.title,
