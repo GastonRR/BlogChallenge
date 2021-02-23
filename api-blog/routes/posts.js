@@ -1,9 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
+// Controller
+const postController = require ('../controllers/PostController')
+
 /* GET */
 
-router.get('/');
+router.get('/',postController.allPost);
 router.get('/:id');
 
 /* POST */
