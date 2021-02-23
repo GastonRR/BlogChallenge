@@ -22,7 +22,9 @@ app.use('/post', postRouter);
 app.use(function(req, res, next) {
   res.status(404).json({
     status: "ERROR",
-    Msg: "404 NOT FOUND"
+    msg: "404 NOT FOUND",
+    endpoint: req.originalUrl,
+    method: req.method,
   })
 });
 

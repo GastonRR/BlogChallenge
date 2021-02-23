@@ -20,9 +20,22 @@ const allPost = async (req, res, next) =>{
             delete post.content;
             return post;
         })
-      res.json(format);
+        res.status(200).json({
+            status: "OK",
+            msg: "POSTS_FOUND",
+            endpoint: req.originalUrl,
+            method: req.method,
+            data: {
+                posts:format
+            }
+        })
     } catch (err) {
-        console.log(err);
+        res.status(404).json({
+            status: "ERROR",
+            msg: "NOT_FOUND",
+            endpoint: req.originalUrl,
+            method: req.method
+        })
     }
 }
 
