@@ -6,8 +6,8 @@ const postController = require ('../controllers/PostController')
 
 /* GET */
 
-router.get('/',postController.allPost);
-router.get('/:id');
+router.get('/', postController.GetAllPosts);
+router.get('/:id', postController.GetPostById);
 
 /* POST */
 
