@@ -40,7 +40,7 @@ module.exports = (sequelize,DataTypes) => {
     }
     let config = {
         tableName: 'post',
-        timestamps: true
+        timestamps: false
     }
 
     const Post = sequelize.define(alias,props,config);
