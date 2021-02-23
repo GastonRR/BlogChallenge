@@ -110,9 +110,41 @@ const NewPost = async (req,res,next)=>{
     }
   
 }
+/* Controller method: PATCH */ 
+const UpdatePost = async (req,res,next) =>{
+    try {
+        let idToEdit = req.params.id;
+        let checkIfExist = await Post.findByPk(idToEdit);
+        if(checkIfExist == null){
+            throw "post not exist"
+        }
+        const editPost = await Post.update(req.body,{
+            where:{
+                id: idToEdit
+            }
+        });
+        res.status(200).json({
+            status: "OK",
+            msg: "CORRECT_UPDATE",
+            endpoint: req.originalUrl,
+            method: req.method,
+        });
+        
+    } catch (error) {
 
+        res.status(404).json({
+            status: "ERROR",
+            msg: error,
+            endpoint: req.originalUrl,
+            method: req.method,
+        });
+    }
+  
+
+}
 module.exports ={
     GetAllPosts,
     GetPostById,
-    NewPost
+    NewPost,
+    UpdatePost
 }

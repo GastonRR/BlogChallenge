@@ -15,7 +15,7 @@ router.post('/',postController.NewPost);
 
 /* PATCH */
 
-router.patch('/:id');
+router.patch('/:id', postController.UpdatePost);
 
 /* DELETE */
 
