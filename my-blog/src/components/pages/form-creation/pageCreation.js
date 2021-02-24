@@ -1,4 +1,4 @@
-
+import React from "react";
  import FormCreation from '../../forms/creationForm'
 
 function CreationPage() {
