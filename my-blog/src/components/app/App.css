@@ -2,6 +2,13 @@ label {
   display: block;
   margin-top: 10px;
 }
+.bg-form{
+  background-color: #343a40!important;
+  color: white;
+}
+body{
+  background-color: #ffc107!important;
+}
 
 .card-container.card {
   max-width: 350px !important;
