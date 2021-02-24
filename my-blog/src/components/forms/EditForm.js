@@ -24,6 +24,7 @@ export default function EditForm({id}) {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [successful, setSuccessful] = useState(false);
+    const [exist, setExist] = useState(true);
     const [message, setMessage] = useState("");
 
     useEffect(() => {
@@ -31,6 +32,9 @@ export default function EditForm({id}) {
             .then((res) => {
                 setData(res.data);
                 console.log(res.data);
+            }).catch((err)=>{
+                setMessage("POST NOT FOUND");
+                setExist(false);
             })
             // eslint-disable-next-line
     }, [])
@@ -65,16 +69,13 @@ export default function EditForm({id}) {
         setContent(content);
     }
 
-
-
-
     return (
         <div className="col-md-12">
 
             <div className="card card-container bg-form">
                 <h2 className="text-center mb-2 alert">{`Edition post: ${id}`}</h2>
                 <Form onSubmit={handleCreation} ref={form}>
-                    {!successful && (
+                    {!successful && exist && (
                         <div>
                             <div className="form-group">
                                 <label htmlFor="title">Title</label>
@@ -108,14 +109,30 @@ export default function EditForm({id}) {
                         </div>
                     )}
 
-                    {message && (
+                    {message && successful && (
                         <div className="form-group">
                             <div
-                                className={successful ? "text-center alert alert-success mt-2" : "alert alert-danger mt-2"}
+                                className="text-center alert alert-success mt"
                                 role="alert"
                             >
                                 <img
                                     src="https://icon-library.com/images/successful-icon/successful-icon-10.jpg"
+                                    alt="profile-img"
+                                    className="profile-img-card"
+                                />
+                                {message} <br />
+                                <a href='/'>Volver al Inicio</a>
+                            </div>
+                        </div>
+                    )}
+                    {message && !successful && !exist && (
+                        <div className="form-group">
+                            <div
+                                className="text-center alert alert-danger mt"
+                                role="alert"
+                            >
+                                <img
+                                    src="https://www.freeiconspng.com/uploads/error-icon-4.png"
                                     alt="profile-img"
                                     className="profile-img-card"
                                 />
