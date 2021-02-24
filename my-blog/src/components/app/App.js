@@ -20,7 +20,7 @@ function App() {
       <Route exact path='/' component={Home}/>
       <Route path='/detail/:id' component={DetailPage}/>
       <Route  path='/create/post' component={CreationPost}/>
-      <Route path='/edit/post/:id' component={EditionPage}/>
+      <Route path='/edit/post/:id?' component={EditionPage}/>
       {/* <Route path='*' component={}></Route> */}
     </Switch>
     </div>

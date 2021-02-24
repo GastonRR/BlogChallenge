@@ -17,26 +17,29 @@ const required = (value) => {
 };
 
 
-export default function EditForm({id}) {
+export default function EditForm({ id }) {
     const form = useRef();
     const checkbtn = useRef();
     const [data, setData] = useState("");
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
+    const [manualId, setManualId] = useState("");
     const [successful, setSuccessful] = useState(false);
     const [exist, setExist] = useState(true);
     const [message, setMessage] = useState("");
 
     useEffect(() => {
-        services.postById(id)
-            .then((res) => {
-                setData(res.data);
-                console.log(res.data);
-            }).catch((err)=>{
-                setMessage("POST NOT FOUND");
-                setExist(false);
-            })
-            // eslint-disable-next-line
+        if (id !== 0) {
+            services.postById(id)
+                .then((res) => {
+                    setData(res.data);
+                    console.log(res.data);
+                }).catch((err) => {
+                    setMessage("POST NOT FOUND");
+                    setExist(false);
+                })
+        }
+        // eslint-disable-next-line
     }, [])
 
     const handleCreation = (e) => {
@@ -49,7 +52,17 @@ export default function EditForm({id}) {
         form.current.validateAll();
 
         if (checkbtn.current.context._errors.length === 0) {
-            services.edit(title, content,id).then((data) => {
+            if(id !== 0){
+                services.edit(title, content, id).then((data) => {
+                    console.log(data);
+                    setSuccessful(true);
+                    setMessage("post edit successfully");
+                }, (error) => {
+                    setMessage("not successfully ");
+                    setSuccessful(false);
+                });
+            }
+            services.edit(title, content, manualId).then((data) => {
                 console.log(data);
                 setSuccessful(true);
                 setMessage("post edit successfully");
@@ -57,12 +70,17 @@ export default function EditForm({id}) {
                 setMessage("not successfully ");
                 setSuccessful(false);
             });
+           
         }
 
     }
     const onChangeTitle = (e) => {
         const title = e.target.value
         setTitle(title);
+    }
+    const onChangeId = (e) => {
+        const id = e.target.value
+        setManualId(id);
     }
     const onChangeContent = (e) => {
         const content = e.target.value
@@ -73,14 +91,29 @@ export default function EditForm({id}) {
         <div className="col-md-12">
 
             <div className="card card-container bg-form">
-                <h2 className="text-center mb-2 alert">{`Edition post: ${id}`}</h2>
+                <h2 className="text-center mb-2 alert">{id !== 0 ? `Edition post: ${id}`:`Edition post` }</h2>
                 <Form onSubmit={handleCreation} ref={form}>
                     {!successful && exist && (
                         <div>
+                        {id===0 && (
+                            <div className="form-group">
+                                <label htmlFor="id">ID</label>
+                                <Input
+                                    type="text"
+                                    className="form-control"
+                                    name="id"
+                                    value={manualId}
+                                    placeholder={data.id}
+                                    onChange={onChangeId}
+                                    validations={[required]}
+                                />
+                            </div>
+                        )}
+                            
                             <div className="form-group">
                                 <label htmlFor="title">Title</label>
                                 <Input
-                                    type="textarea"
+                                    type="text"
                                     className="form-control"
                                     name="title"
                                     value={title}
@@ -94,7 +127,7 @@ export default function EditForm({id}) {
                                 <label htmlFor="content">Content</label>
                                 <TextArea
                                     className="form-control"
-                                    rows = "7"
+                                    rows="7"
                                     name="content"
                                     value={content}
                                     placeholder={data.body}
