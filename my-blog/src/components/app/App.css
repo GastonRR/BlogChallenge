@@ -55,3 +55,7 @@ body{
 .pagination{
   max-width: 350px;
 }
+.btncard{
+  color: #000000!important;
+  background-color: #f4d160!important;
+}
