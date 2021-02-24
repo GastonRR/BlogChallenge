@@ -41,3 +41,17 @@ body{
   border-radius: 50%;
   border: 3px solid #080400;
 }
+.activity-container{
+  max-width: 1000px !important;
+  padding: 15px 15px;
+  color: #ccf2f4 impo !important;
+}
+.table-Activity{
+  box-shadow: 0 8px 4px rgba(0, 0, 0, 0.3);
+}
+.text-list{
+  color: #f4d160!important;
+}
+.pagination{
+  max-width: 350px;
+}
