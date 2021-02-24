@@ -80,6 +80,7 @@ const FormCreation = (props) => {
                 <label htmlFor="content">Content</label>
                 <TextArea
                   className="form-control"
+                  rows = "7"
                   name="content"
                   value={content}
                   onChange={onChangeContent}

@@ -51,8 +51,8 @@ function PostList(props) {
                                 </td>
                                 <td className='text-center'>
                                     <div className="d-flex justify-content-around">
-                                        <a className="text-list" href={`/operation/detail/${post.id}`}><FontAwesomeIcon icon={faEye} /></a>
-                                        <a className="text-list" href={`/operation/edit/${post.id}`}><FontAwesomeIcon icon={faEdit} /></a>
+                                        <a className="text-list" href={`/detail/${post.id}`}><FontAwesomeIcon icon={faEye} /></a>
+                                        <a className="text-list" href={`/edit/post/${post.id}`}><FontAwesomeIcon icon={faEdit} /></a>
                                         <a className="text-list" onClick={() => Delete(post.id)} href="/#"><FontAwesomeIcon icon={faTimesCircle} /></a>
                                     </div>
                                 </td>

@@ -4,8 +4,10 @@ import { Switch, Route } from 'react-router-dom';
 import './App.css';
 
 /* Pages component */
+import EditionPage from '../pages/form-edition/PageEdition'
 import CreationPost from '../pages/form-creation/pageCreation'
 import Home from '../pages/home/home'
+
 
 import NavBar from '../navbar/navbar'
 
@@ -17,7 +19,7 @@ function App() {
       <Route exact path='/' component={Home}/>
       {/* <Route path='/detail/:id' component={}/> */}
       <Route  path='/create/post' component={CreationPost}/>
-      {/* <Route path='/edit/post/:id' component={}/> */}
+      <Route path='/edit/post/:id' component={EditionPage}/>
       {/* <Route path='*' component={}></Route> */}
     </Switch>
     </div>
