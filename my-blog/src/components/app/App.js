@@ -6,9 +6,12 @@ import './App.css';
 /* Pages component */
 import CreationPost from '../pages/form-creation/pageCreation'
 
+import NavBar from '../navbar/navbar'
+
 function App() {
   return (
     <div className="App">
+    <NavBar/>
     <Switch>
       {/* <Route exact path='/' component={}/> */}
       {/* <Route path='/detail/:id' component={}/> */}
